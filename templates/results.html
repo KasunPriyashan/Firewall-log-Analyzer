@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log Analysis Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Log Analysis Results</h1>
+    <center>
+    {% if log_data is not none %}
+        <h2>Action Counts:</h2>
+        <div>
+            {% if actions.empty %}
+                Not found.
+            {% else %}
+                {{ actions.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Top Blocked Ports:</h2>
+        <div>
+            {% if blocked_ports.empty %}
+                Not found.
+            {% else %}
+                {{ blocked_ports.to_string() | replace('\n', '<br>') | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Suspicious IPs:</h2>
+        <div>
+            {% if ips.empty %}
+                Not found.
+            {% else %}
+                {{ ips.to_string() | replace('\n', '<br>') | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Potential DDoS Attempts:</h2>
+        <div>
+            {% if ddos_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ ddos_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Potential Brute Force Attacks:</h2>
+        <div>
+            {% if brute_force_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ brute_force_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Potential Port Scanning Attempts:</h2>
+        <div>
+            {% if port_scanning_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ port_scanning_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Potential Horizontal Scanning Attempts:</h2>
+        <div>
+            {% if horizontal_scanning_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ horizontal_scanning_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Suspicious Traffic on Uncommon Ports:</h2>
+        <div>
+            {% if uncommon_port_traffic.empty %}
+                Not found.
+            {% else %}
+                {{ uncommon_port_traffic.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Unauthorized SSH Access Attempts:</h2>
+        <div>
+            {% if unauthorized_ssh_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ unauthorized_ssh_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>SQL Server Access Attempts:</h2>
+        <div>
+            {% if sql_server_access_attempts.empty %}
+                Not found.
+            {% else %}
+                {{ sql_server_access_attempts.to_string() | safe }}
+            {% endif %}
+        </div>
+        
+        <h2>Potential Repeated Actions from the Same IP:</h2>
+        <div>
+            {% if repeated_actions.empty %}
+                Not found.
+            {% else %}
+                {{ repeated_actions.to_string() | safe }}
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No log data available. Not found.</p>
+    {% endif %}
+    </center>
+</body>
+</html>
